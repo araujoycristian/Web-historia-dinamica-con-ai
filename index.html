@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Viaje del Punto Aventurero</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            font-family: 'Arial', sans-serif;
+            scroll-behavior: smooth;
+        }
+        .scene, .intro, .outro {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+            transition: background-color 0.5s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .intro, .outro {
+            background-color: #1a1a1a;
+            color: white;
+            flex-direction: column;
+        }
+        .intro h1, .outro h2 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        .intro p, .outro p {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            text-align: center;
+            max-width: 80%;
+        }
+        .start-button, .restart-button {
+            padding: 10px 20px;
+            font-size: 1.2rem;
+            background-color: #ff4500;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .start-button:hover, .restart-button:hover {
+            background-color: #ff6a33;
+        }
+        .content {
+            font-size: 24px;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 80%;
+            text-align: center;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            position: absolute;
+            bottom: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .point {
+            width: 30px;
+            height: 30px;
+            background-color: red;
+            border-radius: 50%;
+            position: absolute;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .navigation {
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1000;
+        }
+        .nav-dot {
+            width: 10px;
+            height: 10px;
+            background-color: white;
+            border-radius: 50%;
+            margin: 10px 0;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        .nav-dot.active {
+            transform: scale(1.5);
+            background-color: #ff4500;
+        }
+        .other-point {
+            width: 20px;
+            height: 20px;
+            background-color: blue;
+            border-radius: 50%;
+            position: absolute;
+            transition: all 0.3s ease;
+        }
+        .social-links {
+            margin-top: 20px;
+        }
+        .social-links a {
+            color: #ff4500;
+            text-decoration: none;
+            margin: 0 10px;
+            font-weight: bold;
+        }
+        .social-links a:hover {
+            text-decoration: underline;
+        }
+        @media (max-width: 768px) {
+            .content, .intro p, .outro p {
+                font-size: 18px;
+                max-width: 90%;
+            }
+            .point {
+                width: 20px;
+                height: 20px;
+            }
+            .intro h1, .outro h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="intro" id="intro">
+        <h1>El Viaje del Punto Aventurero</h1>
+        <p>Una experiencia interactiva por Cristian Araujo</p>
+        <button class="start-button" onclick="startExperience()">Comenzar el Viaje</button>
+    </div>
+
+    <div class="navigation">
+        <div class="nav-dot" data-scene="1"></div>
+        <div class="nav-dot" data-scene="2"></div>
+        <div class="nav-dot" data-scene="3"></div>
+        <div class="nav-dot" data-scene="4"></div>
+        <div class="nav-dot" data-scene="5"></div>
+    </div>
+
+    <div id="scene1" class="scene">
+        <div class="point" id="point1"></div>
+        <div class="content">Érase una vez, un pequeño punto rojo que vivía en un mundo plano y monótono. Su vida transcurría en líneas rectas, sin sorpresas ni aventuras...</div>
+    </div>
+    <div id="scene2" class="scene">
+        <div class="point" id="point2"></div>
+        <div class="content">Un día, nuestro valiente punto decidió desafiar las convenciones. Descubrió que podía moverse en curvas y zigzags, ¡abriendo un mundo de posibilidades!</div>
+    </div>
+    <div id="scene3" class="scene">
+        <div class="point" id="point3"></div>
+        <div class="content">En su viaje, el punto rojo encontró otros puntos azules que se movían en patrones predecibles. Intentó comunicarse con ellos, pero parecían atrapados en su rutina...</div>
+    </div>
+    <div id="scene4" class="scene">
+        <div class="point" id="point4"></div>
+        <div class="content">Finalmente, nuestro punto aventurero comprendió que su verdadero camino era único. Con valentía, se lanzó a explorar las infinitas posibilidades de su mundo, inspirando a otros a seguir sus pasos...</div>
+    </div>
+
+    <div class="outro" id="outro">
+        <h2>El Poder de la Colaboración Creativa</h2>
+        <p>Esta experiencia interactiva fue creada en colaboración con una IA avanzada. Cristian Araujo proporcionó la visión creativa y las ideas iniciales, mientras que la IA asistió en la implementación técnica y la expansión narrativa.</p>
+        <p>El proceso de creación fue rápido y dinámico, combinando la intuición humana con la eficiencia computacional de la IA. Cada iteración refinó la historia y mejoró la interactividad, resultando en una experiencia única que fusiona tecnología y creatividad.</p>
+        <p>Este proyecto demuestra el potencial de la colaboración entre humanos e IA en el campo del diseño interactivo y la narración digital.</p>
+        <div class="social-links">
+            <a href="https://www.instagram.com/araujoycristian" target="_blank">Instagram</a>
+            <a href="https://x.com/araujoycristian" target="_blank">X (Twitter)</a>
+        </div>
+        <button class="restart-button" onclick="restartExperience()">Volver al Inicio</button>
+    </div>
+
+    <script>
+        const scenes = document.querySelectorAll('.scene');
+        const navDots = document.querySelectorAll('.nav-dot');
+        const points = document.querySelectorAll('.point');
+        const contents = document.querySelectorAll('.content');
+
+        function startExperience() {
+            document.getElementById('intro').style.display = 'none';
+            updateScene(0);
+            window.scrollTo(0, 0);
+        }
+
+        function restartExperience() {
+            document.getElementById('outro').style.display = 'none';
+            document.getElementById('intro').style.display = 'flex';
+            window.scrollTo(0, 0);
+        }
+
+        function updateScene(index) {
+            if (index >= scenes.length) {
+                document.getElementById('outro').style.display = 'flex';
+                return;
+            }
+            scenes.forEach((scene, i) => {
+                if (i === index) {
+                    scene.style.backgroundColor = getRandomColor();
+                    contents[i].style.opacity = '1';
+                    navDots[i].classList.add('active');
+                    animateScene(i);
+                } else {
+                    scene.style.backgroundColor = '#f0f0f0';
+                    contents[i].style.opacity = '0';
+                    navDots[i].classList.remove('active');
+                }
+            });
+        }
+
+        function getRandomColor() {
+            return `hsl(${Math.random() * 360}, 70%, 80%)`;
+        }
+
+        function animateScene(index) {
+            const point = points[index];
+            if (!point) return;
+            point.style.animation = 'none';
+            point.offsetHeight; // Trigger reflow
+
+            switch(index) {
+                case 0:
+                    point.style.animation = 'moveHorizontal 4s linear infinite';
+                    break;
+                case 1:
+                    point.style.animation = 'moveCurve 6s ease-in-out infinite';
+                    break;
+                case 2:
+                    point.style.animation = 'none';
+                    createOtherPoints(index);
+                    break;
+                case 3:
+                    point.style.animation = 'moveRandom 8s linear infinite';
+                    break;
+            }
+        }
+
+        function createOtherPoints(index) {
+            const scene = scenes[index];
+            scene.innerHTML = '';
+            scene.appendChild(points[index]);
+            scene.appendChild(contents[index]);
+
+            for (let i = 0; i < 5; i++) {
+                const otherPoint = document.createElement('div');
+                otherPoint.className = 'other-point';
+                otherPoint.style.left = `${Math.random() * 80 + 10}%`;
+                otherPoint.style.top = `${Math.random() * 80 + 10}%`;
+                otherPoint.style.animation = `moveCircle ${Math.random() * 3 + 2}s linear infinite`;
+                scene.appendChild(otherPoint);
+            }
+        }
+
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const sceneHeight = window.innerHeight;
+            const currentScene = Math.floor(scrollTop / sceneHeight);
+            updateScene(currentScene);
+        });
+
+        navDots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                window.scrollTo({
+                    top: index * window.innerHeight,
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        points.forEach(point => {
+            point.addEventListener('click', () => {
+                point.style.transform = 'scale(1.5)';
+                setTimeout(() => {
+                    point.style.transform = 'scale(1)';
+                }, 300);
+            });
+        });
+
+        // Añadir animaciones keyframe
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes moveHorizontal {
+                0% { left: 10%; }
+                50% { left: 90%; }
+                100% { left: 10%; }
+            }
+            @keyframes moveCurve {
+                0% { transform: translate(0, 0); }
+                25% { transform: translate(50vw, -25vh); }
+                50% { transform: translate(80vw, 0); }
+                75% { transform: translate(50vw, 25vh); }
+                100% { transform: translate(0, 0); }
+            }
+            @keyframes moveCircle {
+                0% { transform: rotate(0deg) translateX(100px) rotate(0deg); }
+                100% { transform: rotate(360deg) translateX(100px) rotate(-360deg); }
+            }
+            @keyframes moveRandom {
+                0%, 100% { transform: translate(0, 0); }
+                25% { transform: translate(50vw, -30vh); }
+                50% { transform: translate(-30vw, 40vh); }
+                75% { transform: translate(70vw, 20vh); }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
